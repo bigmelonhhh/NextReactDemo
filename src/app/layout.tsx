@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "智医康 - 基于AI与智能硬件的肺癌数字化康复管理",
+  title: "卓繁信息",
   description:
-    "智医康连接患者与医生，通过AI与医疗级物联网硬件实现肺癌院外康复数字化管理。",
+    "上海卓繁信息技术股份有限公司，专注数字政府、一网通办、一网统管、数字乡村和智慧园区解决方案。",
 };
 
 export default function RootLayout({

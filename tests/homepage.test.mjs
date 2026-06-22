@@ -22,7 +22,7 @@ async function waitForServer() {
   throw new Error("Next.js dev server did not become ready in time");
 }
 
-test("homepage mirrors the Zencare landing page core content", async () => {
+test("homepage mirrors the Zhuofan official site core content", async () => {
   let logs = "";
   const server = spawn(
     process.execPath,
@@ -51,13 +51,13 @@ test("homepage mirrors the Zencare landing page core content", async () => {
     const response = await waitForServer();
     const html = await response.text();
 
-    assert.match(html, /智医康科技/);
-    assert.match(html, /基于AI与智能硬件的肺癌数字化康复管理/);
-    assert.match(html, /服务载体/);
-    assert.match(html, /数字疗法内容/);
-    assert.match(html, /三端协同数字化平台/);
-    assert.match(html, /关于智医康/);
-    assert.match(html, /public\/images\/zencare|\/images\/zencare/);
+    assert.match(html, /卓繁信息/);
+    assert.match(html, /资讯动态/);
+    assert.match(html, /客户案例/);
+    assert.match(html, /解决方案/);
+    assert.match(html, /一网通办解决方案/);
+    assert.match(html, /地址：上海市徐汇区桂平路418号A座21层/);
+    assert.match(html, /\/images\/zhuofan/);
   } finally {
     if (server.pid) {
       await new Promise((resolve) => {

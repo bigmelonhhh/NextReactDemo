@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { navItems } from "@/content/zencare";
+import { navItems, zhuofanAsset } from "@/content/zhuofan";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -13,44 +13,60 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 100);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={cn("site-header", scrolled && "site-header--scrolled")}>
-      <a className="site-logo" href="#home" aria-label="智医康科技首页">
-        <Image
-          src="/images/zencare/logo.webp"
-          alt="智医康科技 Logo"
-          width={193}
-          height={40}
-          priority
-        />
-      </a>
+    <header className={cn("zf-header", scrolled && "zf-header--scrolled")}>
+      <div className="zf-header__inner">
+        <a className="zf-logo" href="#home" aria-label="卓繁信息首页">
+          <Image
+            src={scrolled ? zhuofanAsset("img/newIndexOne/logo.png") : zhuofanAsset("img/newIndexOne/logo1.png")}
+            alt="卓繁信息"
+            width={165}
+            height={46}
+            priority
+          />
+        </a>
 
-      <nav className={cn("site-nav", open && "site-nav--open")} aria-label="主导航">
-        {navItems.map((item) => (
-          <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-            {item.label}
+        <nav className={cn("zf-nav", open && "zf-nav--open")} aria-label="主导航">
+          {navItems.map((item) => (
+            <div className="zf-nav__item" key={item.label}>
+              <a href={item.href} onClick={() => setOpen(false)}>
+                {item.label}
+                {item.children ? <ChevronDown aria-hidden="true" size={16} /> : null}
+              </a>
+              {item.children ? (
+                <div className="zf-nav__submenu">
+                  {item.children.map((child) => (
+                    <a key={child} href={item.href} onClick={() => setOpen(false)}>
+                      {child}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ))}
+          <a className="zf-language" href="https://www.zhuofansoft.com/en/">
+            English
           </a>
-        ))}
-      </nav>
+        </nav>
 
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon-lg"
-        className="site-menu-button"
-        aria-label={open ? "关闭导航菜单" : "打开导航菜单"}
-        aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-      >
-        {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-      </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-lg"
+          className="zf-menu-button"
+          aria-label={open ? "关闭导航菜单" : "打开导航菜单"}
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </Button>
+      </div>
     </header>
   );
 }
-

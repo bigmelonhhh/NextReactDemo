@@ -1,10 +1,10 @@
-import { About } from "./about";
-import { DigitalTherapy } from "./digital-therapy";
 import { Footer } from "./footer";
+import { FloatingToolbar } from "./floating-toolbar";
 import { Header } from "./header";
 import { Hero } from "./hero";
-import { PlatformShowcase } from "./platform-showcase";
-import { ServiceCarrier } from "./service-carrier";
+import { CaseSection } from "./case-section";
+import { NewsSection } from "./news-section";
+import { SolutionsSection } from "./solutions-section";
 
 export function HomePage() {
   return (
@@ -12,13 +12,12 @@ export function HomePage() {
       <Header />
       <main>
         <Hero />
-        <ServiceCarrier />
-        <DigitalTherapy />
-        <PlatformShowcase />
-        <About />
+        <NewsSection />
+        <CaseSection />
+        <SolutionsSection />
       </main>
       <Footer />
+      <FloatingToolbar />
     </>
   );
 }
-
